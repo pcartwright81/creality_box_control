@@ -16,7 +16,7 @@ from homeassistant.loader import async_get_loaded_integration
 from custom_components.creality_box_control.const import HOST, PORT
 
 from .coordinator import CrealityBoxDataUpdateCoordinator
-from .data import IntegrationBlueprintData
+from .data import CrealityBoxData
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
@@ -39,7 +39,7 @@ async def async_setup_entry(
     coordinator = CrealityBoxDataUpdateCoordinator(
         hass=hass,
     )
-    entry.runtime_data = IntegrationBlueprintData(
+    entry.runtime_data = CrealityBoxData(
         client=CrealityWifiBoxClient(
             box_ip=entry.data[HOST], box_port=entry.data[PORT]
         ),

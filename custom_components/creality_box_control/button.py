@@ -15,7 +15,11 @@ from custom_components.creality_box_control.const import (
 from .entity import CrealityBoxEntity
 
 if TYPE_CHECKING:
+    from homeassistant.core import HomeAssistant
+    from homeassistant.helpers.entity_platform import AddEntitiesCallback
+
     from .coordinator import CrealityBoxDataUpdateCoordinator
+    from .data import CrealityBoxControlConfigEntry
 
 ENTITY_DESCRIPTIONS = (
     ButtonEntityDescription(
@@ -31,6 +35,21 @@ ENTITY_DESCRIPTIONS = (
         name="Stop Print",
     ),
 )
+
+
+async def async_setup_entry(
+    _: HomeAssistant,
+    entry: CrealityBoxControlConfigEntry,
+    async_add_entities: AddEntitiesCallback,
+) -> None:
+    """Set up the sensor platform."""
+    async_add_entities(
+        CrealityBoxButton(
+            coordinator=entry.runtime_data.coordinator,
+            entity_description=entity_description,
+        )
+        for entity_description in ENTITY_DESCRIPTIONS
+    )
 
 
 class CrealityBoxButton(CrealityBoxEntity, ButtonEntity):

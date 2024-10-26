@@ -1,4 +1,4 @@
-"""Adds config flow for Blueprint."""
+"""Adds config flow for Creality Box."""
 
 from __future__ import annotations
 
@@ -10,8 +10,8 @@ from homeassistant import config_entries, data_entry_flow
 from .const import DOMAIN, HOST, LOGGER, MODEL, PORT
 
 
-class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
-    """Config flow for Blueprint."""
+class CrealityBoxFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
+    """Config flow for Creality Box."""
 
     VERSION = 1
 

@@ -1,4 +1,4 @@
-"""BlueprintEntity class."""
+"""CrealityBoxEntity class."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 class CrealityBoxEntity(CoordinatorEntity[CrealityBoxDataUpdateCoordinator]):
-    """BlueprintEntity class."""
+    """CrealityBoxEntity class."""
 
     _attr_attribution = ATTRIBUTION
 

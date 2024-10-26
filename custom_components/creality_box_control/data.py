@@ -13,12 +13,12 @@ if TYPE_CHECKING:
     from .coordinator import CrealityBoxDataUpdateCoordinator
 
 
-type CrealityBoxControlConfigEntry = ConfigEntry[IntegrationBlueprintData]
+type CrealityBoxControlConfigEntry = ConfigEntry[CrealityBoxData]
 
 
 @dataclass
-class IntegrationBlueprintData:
-    """Data for the Blueprint integration."""
+class CrealityBoxData:
+    """Data for the Creality Box integration."""
 
     client: CrealityWifiBoxClient
     coordinator: CrealityBoxDataUpdateCoordinator
