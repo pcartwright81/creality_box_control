@@ -8,8 +8,8 @@
   "documentation": "https://github.com/pcartwright81/creality_box_control",
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/pcartwright81/creality_box_control/issues",
-  "version": "0.0.1",
   "requirements": [
     "creality-wifi-box-client==v0.0.2"
-  ]
+  ],
+  "version": "0.0.1"
 }
