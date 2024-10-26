@@ -17,8 +17,8 @@ _Integration to integrate with [creality_box_control][creality_box_control]._
 Platform | Description
 -- | --
 `binary_sensor` | Show something `True` or `False`.
-`sensor` | Show info from blueprint API.
-`switch` | Switch something `True` or `False`.
+`sensor` | Show info from the wifi box.
+`button` | Stop, pause, and resume prints.
 
 ## Installation
 
@@ -51,6 +51,6 @@ If you want to contribute to this please read the [Contribution guidelines](CONT
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
 [forum]: https://community.home-assistant.io/
 [license-shield]: https://img.shields.io/github/license/pcartwright81/creality_box_control.svg?style=for-the-badge
-[maintenance-shield]: https://img.shields.io/badge/maintainer-Joakim%20Sørensen%20%40pcartwright81-blue.svg?style=for-the-badge
+[maintenance-shield]: https://img.shields.io/badge/maintainer-Patrick%20Cartwright%20%40pcartwright81-blue.svg?style=for-the-badge
 [releases-shield]: https://img.shields.io/github/release/pcartwright81/creality_box_control.svg?style=for-the-badge
 [releases]: https://github.com/pcartwright81/creality_box_control/releases
