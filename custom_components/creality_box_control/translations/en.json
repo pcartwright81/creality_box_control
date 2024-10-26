@@ -4,13 +4,12 @@
             "user": {
                 "description": "If you need help with the configuration have a look here: https://github.com/pcartwright81/creality_box_control",
                 "data": {
-                    "username": "Username",
-                    "password": "Password"
+                    "host": "Host",
+                    "port": "Port"
                 }
             }
         },
         "error": {
-            "auth": "Username/Password is wrong.",
             "connection": "Unable to connect to the server.",
             "unknown": "Unknown error occurred."
         }

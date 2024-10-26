@@ -6,20 +6,20 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from creality_wifi_box_client.creality_wifi_box_client import CrealityWifiBoxClient
     from homeassistant.config_entries import ConfigEntry
     from homeassistant.loader import Integration
 
-    from .api import IntegrationBlueprintApiClient
-    from .coordinator import BlueprintDataUpdateCoordinator
+    from .coordinator import CrealityBoxDataUpdateCoordinator
 
 
-type IntegrationBlueprintConfigEntry = ConfigEntry[IntegrationBlueprintData]
+type CrealityBoxControlConfigEntry = ConfigEntry[IntegrationBlueprintData]
 
 
 @dataclass
 class IntegrationBlueprintData:
     """Data for the Blueprint integration."""
 
-    client: IntegrationBlueprintApiClient
-    coordinator: BlueprintDataUpdateCoordinator
+    client: CrealityWifiBoxClient
+    coordinator: CrealityBoxDataUpdateCoordinator
     integration: Integration

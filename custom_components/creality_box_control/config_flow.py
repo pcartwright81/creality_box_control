@@ -2,19 +2,12 @@
 
 from __future__ import annotations
 
+import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
+from creality_wifi_box_client.creality_wifi_box_client import CrealityWifiBoxClient
 from homeassistant import config_entries, data_entry_flow
-from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
-from homeassistant.helpers import selector
-from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
-from .api import (
-    IntegrationBlueprintApiClient,
-    IntegrationBlueprintApiClientAuthenticationError,
-    IntegrationBlueprintApiClientCommunicationError,
-    IntegrationBlueprintApiClientError,
-)
-from .const import DOMAIN, LOGGER
+from .const import DOMAIN, HOST, LOGGER, MODEL, PORT
 
 
 class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
@@ -30,22 +23,17 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         _errors = {}
         if user_input is not None:
             try:
-                await self._test_credentials(
-                    username=user_input[CONF_USERNAME],
-                    password=user_input[CONF_PASSWORD],
+                model = await self._test_connect_and_get_model(
+                    host=user_input[HOST],
+                    port=user_input[PORT],
                 )
-            except IntegrationBlueprintApiClientAuthenticationError as exception:
-                LOGGER.warning(exception)
-                _errors["base"] = "auth"
-            except IntegrationBlueprintApiClientCommunicationError as exception:
-                LOGGER.error(exception)
-                _errors["base"] = "connection"
-            except IntegrationBlueprintApiClientError as exception:
+            except Exception as exception:  # noqa: BLE001 My api needs real exceptions, but it's really just pass or fail.
                 LOGGER.exception(exception)
                 _errors["base"] = "unknown"
             else:
+                user_input[MODEL] = model
                 return self.async_create_entry(
-                    title=user_input[CONF_USERNAME],
+                    title=f"{model}@{user_input[HOST]}",
                     data=user_input,
                 )
 
@@ -53,29 +41,19 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user",
             data_schema=vol.Schema(
                 {
-                    vol.Required(
-                        CONF_USERNAME,
-                        default=(user_input or {}).get(CONF_USERNAME, vol.UNDEFINED),
-                    ): selector.TextSelector(
-                        selector.TextSelectorConfig(
-                            type=selector.TextSelectorType.TEXT,
-                        ),
-                    ),
-                    vol.Required(CONF_PASSWORD): selector.TextSelector(
-                        selector.TextSelectorConfig(
-                            type=selector.TextSelectorType.PASSWORD,
-                        ),
-                    ),
+                    vol.Required(HOST): cv.string,
+                    vol.Required(PORT, default=81): cv.port,
                 },
             ),
             errors=_errors,
         )
 
-    async def _test_credentials(self, username: str, password: str) -> None:
-        """Validate credentials."""
-        client = IntegrationBlueprintApiClient(
-            username=username,
-            password=password,
-            session=async_create_clientsession(self.hass),
-        )
-        await client.async_get_data()
+    async def _test_connect_and_get_model(self, host: str, port: int) -> str:
+        """Validate input and get model."""
+        client = CrealityWifiBoxClient(box_ip=host, box_port=port)
+        info = await client.get_info()
+        model = info.model.strip()
+        if model == "":
+            msg = "Model was blank."
+            raise ValueError(msg)
+        return model
