@@ -1,8 +1,8 @@
-"""Constants for integration_blueprint."""
+"""Constants for creality_box_control."""
 
 from logging import Logger, getLogger
 
 LOGGER: Logger = getLogger(__package__)
 
-DOMAIN = "integration_blueprint"
+DOMAIN = "creality_box_control"
 ATTRIBUTION = "Data provided by http://jsonplaceholder.typicode.com/"

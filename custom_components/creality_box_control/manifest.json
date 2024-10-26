@@ -1,0 +1,12 @@
+{
+  "domain": "creality_box_control",
+  "name": "Integration blueprint",
+  "codeowners": [
+    "@pcartwright81"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/pcartwright81/creality_box_control",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/pcartwright81/creality_box_control/issues",
+  "version": "0.0.0"
+}

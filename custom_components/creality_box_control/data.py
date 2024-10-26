@@ -1,4 +1,4 @@
-"""Custom types for integration_blueprint."""
+"""Custom types for creality_box_control."""
 
 from __future__ import annotations
 
