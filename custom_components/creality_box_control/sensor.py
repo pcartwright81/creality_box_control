@@ -85,9 +85,9 @@ ENTITY_DESCRIPTIONS = (
 
 
 def _map_state(state: int, connect: int) -> str:
-    #Map the state
-    #Pieced together from
-    #https://github.com/CrealityOfficial/CrealityPrint/tree/release-v5.0.3/plugins/CrealityUI/CrealityUI/lanprinterqml
+    # Map the state
+    # Pieced together from
+    # https://github.com/CrealityOfficial/CrealityPrint/tree/release-v5.0.3/plugins/CrealityUI/CrealityUI/lanprinterqml
     LOGGER.debug(f"State:{state} Connect:{connect}")
     if connect != 1:
         return "Offline"
