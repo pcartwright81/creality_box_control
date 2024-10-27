@@ -7,6 +7,10 @@ from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any
 
 from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
+from homeassistant.components.sensor.const import SensorDeviceClass
+from homeassistant.const import UnitOfTemperature
+
+from custom_components.creality_box_control.const import LOGGER
 
 from .entity import CrealityBoxEntity
 
@@ -59,11 +63,17 @@ ENTITY_DESCRIPTIONS = (
         key="nozzle_temp",
         name="Nozzle Temp",
         value_fn=lambda x: x.nozzle_temp,
+        device_class=SensorDeviceClass.TEMPERATURE,
+        suggested_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
     ),
     CrealityBoxSensorEntityDescription(
         key="bed_temp",
         name="Bed Temp",
         value_fn=lambda x: x.bed_temp,
+        device_class=SensorDeviceClass.TEMPERATURE,
+        suggested_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
     ),
     CrealityBoxSensorEntityDescription(
         key="print_progress",
@@ -75,19 +85,22 @@ ENTITY_DESCRIPTIONS = (
 
 
 def _map_state(state: int, connect: int) -> str:
-    offline = 2
-    if connect == offline:
+    #Map the state
+    #Pieced together from
+    #https://github.com/CrealityOfficial/CrealityPrint/tree/release-v5.0.3/plugins/CrealityUI/CrealityUI/lanprinterqml
+    LOGGER.debug(f"State:{state} Connect:{connect}")
+    if connect != 1:
         return "Offline"
-    idle = 0
-    if state == idle:
-        return "Idle"
     printing = 1
+    stopping = 4
+    suspending = 5
     if state == printing:
         return "Printing"
-    error = 4
-    if state == error:
-        return "Error"
-    return "Unable to parse status"
+    if state == stopping:
+        return "Stopping"
+    if state == suspending:
+        return "Suspending"
+    return "Idle"
 
 
 def _to_time_left(seconds_left: int) -> str:
