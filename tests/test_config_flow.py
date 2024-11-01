@@ -82,7 +82,7 @@ async def test_cannot_connect(hass: HomeAssistant, mock_client: AsyncMock) -> No
 
 async def test_blank_model(hass: HomeAssistant, mock_client: AsyncMock) -> None:
     """Test handling a blank model."""
-    info = MagicMock(model = "")
+    info = MagicMock(model="")
     mock_client.get_info = AsyncMock(return_value=info)
 
     # Act
@@ -98,6 +98,7 @@ async def test_blank_model(hass: HomeAssistant, mock_client: AsyncMock) -> None:
     assert result["type"] == "form"
     assert result["errors"] == {"base": "unknown"}
 
+
 async def test__test_connect_and_get_model_success() -> None:
     """Test successful credential validation."""
     with patch(
@@ -109,11 +110,12 @@ async def test__test_connect_and_get_model_success() -> None:
         assert result is TEST_MODEL
         mock_test_connection.assert_called_once_with()
 
+
 async def test__test_connect_and_get_model_error() -> None:
     """Test successful credential validation."""
     with patch(
         "creality_wifi_box_client.creality_wifi_box_client.CrealityWifiBoxClient.get_info",
-        return_value=MagicMock(model = ""),
+        return_value=MagicMock(model=""),
     ) as mock_test_connection:
         handler = CrealityBoxFlowHandler()
         with pytest.raises(ValueError) as exc_info:  # noqa: PT011
@@ -121,4 +123,3 @@ async def test__test_connect_and_get_model_error() -> None:
 
         assert str(exc_info.value) == "Model was blank."
         mock_test_connection.assert_called_once_with()
-

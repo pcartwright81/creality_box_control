@@ -17,7 +17,7 @@ from custom_components.creality_box_control import (
 # This fixture is used to enable custom integrations, otherwise the custom_components
 # folder will not be loaded.
 @pytest.fixture(autouse=True)
-def auto_enable_custom_integrations(enable_custom_integrations: None):  # noqa: ANN001, ANN201, ARG001
+def auto_enable_custom_integrations(enable_custom_integrations: None):  # noqa: ANN201, ARG001
     """Enable custom integrations."""
     return
 
@@ -30,6 +30,7 @@ def skip_first_refresh() -> Generator:
         return_value=None,
     ) as mock:
         yield mock
+
 
 async def test_async_setup_entry(hass: HomeAssistant) -> None:
     """Test the async_setup_entry function."""

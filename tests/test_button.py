@@ -4,7 +4,11 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 from homeassistant.core import HomeAssistant
-from custom_components.creality_box_control.button import ENTITY_DESCRIPTIONS, async_setup_entry
+
+from custom_components.creality_box_control.button import (
+    ENTITY_DESCRIPTIONS,
+    async_setup_entry,
+)
 from custom_components.creality_box_control.const import (
     PRINT_PAUSE,
     PRINT_RESUME,
@@ -51,6 +55,7 @@ async def test_buttons(
     await button.async_press()
     # Assert
     coordinator.send_command.assert_awaited_once_with(command)
+
 
 async def test_button_setup_entry(hass: HomeAssistant) -> None:
     """Test the async_setup_entry function."""

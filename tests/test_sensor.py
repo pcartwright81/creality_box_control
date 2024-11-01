@@ -118,6 +118,7 @@ async def test_sensor(
     # Assert
     assert sensor.native_value == expected_state
 
+
 async def test_button_setup_entry(hass: HomeAssistant) -> None:
     """Test the async_setup_entry function."""
     entry = MagicMock()
@@ -135,6 +136,7 @@ async def test_button_setup_entry(hass: HomeAssistant) -> None:
     assert async_add_entities.call_count == 1
     assert len(sensors) == len(ENTITY_DESCRIPTIONS)
 
+
 @pytest.mark.parametrize(
     ("seconds_left", "expected_output"),
     [
@@ -148,6 +150,7 @@ async def test_button_setup_entry(hass: HomeAssistant) -> None:
 def test_to_time_left(seconds_left: int, expected_output: str) -> None:
     """Test the _to_time_left function."""
     assert _to_time_left(seconds_left) == expected_output
+
 
 @pytest.mark.parametrize(
     ("state", "connect", "expected_output"),

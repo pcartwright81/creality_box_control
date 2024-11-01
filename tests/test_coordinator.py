@@ -1,10 +1,9 @@
 """Tests for the coordinator."""
 
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 from homeassistant.core import HomeAssistant
-from pytest_mock import MockerFixture
 
 from custom_components.creality_box_control.const import (
     PRINT_PAUSE,
@@ -71,9 +70,9 @@ async def test_send_command(
     """Test sending commands to the printer."""
     # Assert
     if command == "error":
-       with pytest.raises(Exception) as exc_info:  # noqa: PT011
+        with pytest.raises(Exception) as exc_info:  # noqa: PT011
             await coordinator.send_command(command)
-       assert str(exc_info.value) == "Unknown command: error"
+        assert str(exc_info.value) == "Unknown command: error"
     else:
         await coordinator.send_command(command)
         getattr(

@@ -67,6 +67,7 @@ async def test_binary_sensor(
     # Assert
     assert sensor.is_on == expected_state
 
+
 async def test_binary_sensor_setup_entry(hass: HomeAssistant) -> None:
     """Test the async_setup_entry function."""
     entry = MagicMock()
@@ -83,5 +84,3 @@ async def test_binary_sensor_setup_entry(hass: HomeAssistant) -> None:
     # Assert that async_add_entities was called with a list of the expected sensors
     assert async_add_entities.call_count == 1
     assert len(sensors) == len(ENTITY_DESCRIPTIONS)
-
-
