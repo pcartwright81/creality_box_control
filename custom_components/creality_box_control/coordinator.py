@@ -44,10 +44,14 @@ class CrealityBoxDataUpdateCoordinator(DataUpdateCoordinator[BoxInfo]):
             client = self.config_entry.runtime_data.client
             if command == PRINT_STOP:
                 await client.stop_print()
-            if command == PRINT_RESUME:
+            elif command == PRINT_RESUME:
                 await client.resume_print()
-            if command == PRINT_PAUSE:
+            elif command == PRINT_PAUSE:
                 await client.pause_print()
-
-        except Exception as e:  # noqa: BLE001
-            LOGGER.error(f"Failed to send command {command}: {e}")
+            else:
+                msg = f"Unknown command: {command}"
+                raise ValueError(msg)  # noqa: TRY301
+        except Exception as e:
+            msg = f"Failed to send command {command}: {e}"
+            LOGGER.error(msg)
+            raise
