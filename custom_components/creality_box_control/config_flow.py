@@ -27,7 +27,7 @@ class CrealityBoxFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                     host=user_input[HOST],
                     port=user_input[PORT],
                 )
-            except Exception as exception:  # noqa: BLE001 My api needs real exceptions, but it's really just pass or fail.
+            except Exception as exception:  # noqa: BLE001 api needs real exceptions, but it's really just pass or fail.
                 LOGGER.exception(exception)
                 _errors["base"] = "unknown"
             else:
