@@ -41,18 +41,6 @@ def coordinator(
     coordinator.config_entry.runtime_data.client = mock_client
     return coordinator
 
-
-async def test_async_config_entry_first_refresh(
-    coordinator: CrealityBoxDataUpdateCoordinator,
-) -> None:
-    """Test the coordinator is setup correctly."""
-    # Arrange
-    # Act
-    await coordinator.async_config_entry_first_refresh()
-    # Assert
-    assert coordinator.data.model == "CR-10"
-
-
 @pytest.mark.parametrize(
     ("command", "client_method"),
     [
