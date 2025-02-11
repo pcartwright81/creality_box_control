@@ -1,4 +1,4 @@
 -r requirements.txt
-pytest==8.3.3
-pytest-homeassistant-custom-component==0.13.175
+pytest==8.3.4
+pytest-homeassistant-custom-component==0.13.205
 pytest-mock==3.14.0
