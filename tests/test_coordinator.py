@@ -41,6 +41,7 @@ def coordinator(
     coordinator.config_entry.runtime_data.client = mock_client
     return coordinator
 
+
 @pytest.mark.parametrize(
     ("command", "client_method"),
     [
