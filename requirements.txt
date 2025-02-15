@@ -1,5 +1,5 @@
 colorlog==6.9.0
-homeassistant==2025.1.4
+homeassistant==2025.2.4
 pip==25.0.1
 ruff==0.9.5
 creality-wifi-box-client==0.0.3
