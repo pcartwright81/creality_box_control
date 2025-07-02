@@ -7,6 +7,7 @@ from homeassistant.core import HomeAssistant
 
 from custom_components.creality_box_control.button import (
     ENTITY_DESCRIPTIONS,
+    CrealityBoxButton,
     async_setup_entry,
 )
 from custom_components.creality_box_control.const import (
@@ -44,9 +45,6 @@ async def test_buttons(
     command: str,
 ) -> None:
     """Test button press."""
-    # Arrange
-    from custom_components.creality_box_control.button import CrealityBoxButton
-
     button = CrealityBoxButton(
         coordinator=coordinator,
         entity_description=MagicMock(key=command),
