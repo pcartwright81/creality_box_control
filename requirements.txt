@@ -1,6 +1,6 @@
 colorlog==6.9.0
 homeassistant==2025.6.3
 pip==25.1.1
-ruff==0.12.1
+ruff==0.12.2
 creality-wifi-box-client==0.0.3
 pydebug
