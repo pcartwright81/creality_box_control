@@ -3,6 +3,7 @@
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
+from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
 from homeassistant.core import HomeAssistant
 
 from custom_components.creality_box_control.const import (
@@ -13,14 +14,14 @@ from custom_components.creality_box_control.const import (
 from custom_components.creality_box_control.coordinator import (
     CrealityBoxDataUpdateCoordinator,
 )
-from tests import TEST_BOX_INFO, TEST_CONFIG_ENTRY_ID, TEST_TITLE
+from tests import TEST_CONFIG_ENTRY_ID, TEST_TITLE
 
 
 @pytest.fixture
-def mock_client() -> AsyncMock:
+def mock_client(mock_box_info: BoxInfo) -> AsyncMock:
     """Mock the client."""
     client = AsyncMock()
-    client.get_info = AsyncMock(return_value=TEST_BOX_INFO)
+    client.get_info = AsyncMock(return_value=mock_box_info)
     return client
 
 

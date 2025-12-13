@@ -1,6 +1,6 @@
 {
     "name": "Creality Wifi Box Control",
     "hide_default_branch": true,
-    "homeassistant": "2025.2.4",
+    "homeassistant": "2025.12.1",
     "render_readme": true
 }

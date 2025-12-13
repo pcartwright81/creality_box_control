@@ -135,6 +135,6 @@ class CrealityBoxSensor(CrealityBoxEntity, SensorEntity):
         self.entity_description: CrealityBoxSensorEntityDescription = entity_description
 
     @property
-    def native_value(self) -> Any:
+    def native_value(self) -> Any:  # noqa: ANN401
         """Return the native value of the sensor."""
         return self.entity_description.value_fn(self.coordinator.data)

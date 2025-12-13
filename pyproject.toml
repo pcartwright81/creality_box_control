@@ -1,18 +1,61 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "creality_box_control"
+version = "0.0.3"
+description = "Home Assistant Custom Component"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "colorlog==6.10.1",
+    "creality-wifi-box-client==0.0.4",
+    "homeassistant==2025.12.1",
+    "pip==25.3",
+    "pydebug",
+]
+
+[tool.setuptools.packages.find]
+include = ["custom_components*"]
+
+[project.optional-dependencies]
+test = ["pytest-homeassistant-custom-component",
+"pytest-mock",
+"ruff==0.14.8"]
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
-testpaths = [
-    "tests",
-]
-norecursedirs = [
-    ".git",
-    "testing_config",
-]
-
+testpaths = ["tests"]
+norecursedirs = [".git", "testing_config"]
 addopts = "--timeout=150 --cov-report=xml:coverage.xml --cov-report=term-missing --cov=custom_components.creality_box_control --cov-fail-under=100 --disable-socket --allow-unix-socket"
 
 [tool.coverage.report]
-exclude_also = [
-    "raise NotImplementedError",
-    "if TYPE_CHECKING:"
+exclude_also = ["raise NotImplementedError", "if TYPE_CHECKING:"]
+
+[tool.ruff]
+target-version = "py313"
+exclude = ["build", "dist", ".venv", "__pycache__"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D203",   # no-blank-line-before-class (incompatible with formatter)
+    "D212",   # multi-line-summary-first-line (incompatible with formatter)
+    "COM812", # incompatible with formatter
+    "ISC001", # incompatible with formatter
+    "EXE002", # no shebang
 ]
+
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true
+
+[tool.ruff.lint.mccabe]
+max-complexity = 25
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]

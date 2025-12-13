@@ -3,11 +3,12 @@
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
+from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
 from homeassistant.core import HomeAssistant
 
 from custom_components.creality_box_control.config_flow import CrealityBoxFlowHandler
 from custom_components.creality_box_control.const import DOMAIN, HOST, MODEL, PORT
-from tests import TEST_BOX_INFO, TEST_HOST, TEST_MODEL, TEST_PORT
+from tests import TEST_HOST, TEST_MODEL, TEST_PORT
 
 pytestmark = pytest.mark.asyncio
 
@@ -37,10 +38,12 @@ async def test_show_form(hass: HomeAssistant) -> None:
     assert result["step_id"] == "user"
 
 
-async def test_create_entry(hass: HomeAssistant, mock_client: AsyncMock) -> None:
+async def test_create_entry(
+    hass: HomeAssistant, mock_client: AsyncMock, mock_box_info: BoxInfo
+) -> None:
     """Test creating an entry."""
     # Arrange
-    mock_client.get_info = AsyncMock(return_value=TEST_BOX_INFO)
+    mock_client.get_info = AsyncMock(return_value=mock_box_info)
     with patch(
         "custom_components.creality_box_control.config_flow.CrealityBoxFlowHandler._test_connect_and_get_model",
         return_value="CR-10",
@@ -99,14 +102,14 @@ async def test_blank_model(hass: HomeAssistant, mock_client: AsyncMock) -> None:
     assert result["errors"] == {"base": "unknown"}
 
 
-async def test__test_connect_and_get_model_success() -> None:
+async def test__test_connect_and_get_model_success(mock_box_info: BoxInfo) -> None:
     """Test successful credential validation."""
     with patch(
         "creality_wifi_box_client.creality_wifi_box_client.CrealityWifiBoxClient.get_info",
-        return_value=TEST_BOX_INFO,
+        return_value=mock_box_info,
     ) as mock_test_connection:
         handler = CrealityBoxFlowHandler()
-        result = await handler._test_connect_and_get_model(TEST_HOST, TEST_PORT)
+        result = await handler._test_connect_and_get_model(TEST_HOST, TEST_PORT)  # noqa: SLF001
         assert result is TEST_MODEL
         mock_test_connection.assert_called_once_with()
 
@@ -119,7 +122,7 @@ async def test__test_connect_and_get_model_error() -> None:
     ) as mock_test_connection:
         handler = CrealityBoxFlowHandler()
         with pytest.raises(ValueError) as exc_info:  # noqa: PT011
-            await handler._test_connect_and_get_model(TEST_HOST, TEST_PORT)
+            await handler._test_connect_and_get_model(TEST_HOST, TEST_PORT)  # noqa: SLF001
 
         assert str(exc_info.value) == "Model was blank."
         mock_test_connection.assert_called_once_with()
