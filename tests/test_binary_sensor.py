@@ -85,3 +85,28 @@ async def test_binary_sensor_setup_entry(hass: HomeAssistant) -> None:
     # Assert that async_add_entities was called with a list of the expected sensors
     assert async_add_entities.call_count == 1
     assert len(sensors) == len(ENTITY_DESCRIPTIONS)
+
+async def test_binary_sensor_update(coordinator: MagicMock) -> None:
+    """Test the binary sensor update."""
+    entity_description = MagicMock(
+        key="upgrade_status",
+        name="Upgrade Available",
+        value_fn=lambda x: bool(x.upgrade_status),
+    )
+    sensor = CrealityBoxBinarySensor(
+        coordinator=coordinator, entity_description=entity_description
+    )
+    sensor.async_write_ha_state = MagicMock()
+
+    # Initial state
+    assert sensor.is_on is False
+
+    # Update data
+    coordinator.data = MagicMock(upgrade_status=1)
+
+    # Act
+    sensor._handle_coordinator_update()  # noqa: SLF001
+
+    # Assert
+    assert sensor.is_on is True
+    sensor.async_write_ha_state.assert_called_once()

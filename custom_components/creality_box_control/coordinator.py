@@ -34,7 +34,7 @@ class CrealityBoxDataUpdateCoordinator(DataUpdateCoordinator[BoxInfo]):
             update_interval=timedelta(seconds=10),
         )
 
-    async def _async_update_data(self) -> Any:
+    async def _async_update_data(self) -> Any:  # noqa: ANN401
         """Update data via library."""
         return await self.config_entry.runtime_data.client.get_info()
 

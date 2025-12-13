@@ -24,12 +24,9 @@ if TYPE_CHECKING:
 
 
 @dataclass(frozen=True, kw_only=True)
-class CrealityBoxBinarySensorEntityDescription(
-    BinarySensorEntityDescription, frozen_or_thawed=True
-):
+class CrealityBoxBinarySensorEntityDescription(BinarySensorEntityDescription):
     """A class that describes binary sensor entities."""
 
-    icon_on: str | None = None
     value_fn: Callable[[BoxInfo], bool | None]
 
 
@@ -60,7 +57,7 @@ async def async_setup_entry(
     )
 
 
-class CrealityBoxBinarySensor(CrealityBoxEntity, BinarySensorEntity):
+class CrealityBoxBinarySensor(CrealityBoxEntity, BinarySensorEntity):  # type: ignore[misc]
     """creality_box_control binary_sensor class."""
 
     def __init__(
@@ -70,14 +67,15 @@ class CrealityBoxBinarySensor(CrealityBoxEntity, BinarySensorEntity):
     ) -> None:
         """Initialize the binary_sensor class."""
         super().__init__(coordinator, entity_description)
-        self.entity_description: CrealityBoxBinarySensorEntityDescription = (
-            entity_description
-        )
 
-    @property
-    def is_on(self) -> bool:
-        """Return true if the binary_sensor is on."""
-        value = self.entity_description.value_fn(self.coordinator.data)
-        if value is None:
-            return False
-        return value
+        self._update_attr_value()
+
+    def _handle_coordinator_update(self) -> None:
+        """Handle updated data from the coordinator."""
+        self._update_attr_value()
+        super()._handle_coordinator_update()
+
+    def _update_attr_value(self) -> None:
+        """Update the _attr_is_on value based on the coordinator data."""
+        value = self.entity_description.value_fn(self.coordinator.data) # pyright: ignore[reportAttributeAccessIssue]
+        self._attr_is_on = bool(value) if value is not None else False

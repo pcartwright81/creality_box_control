@@ -36,11 +36,18 @@ async def test_entity(coordinator: MagicMock, mock_box_info: BoxInfo) -> None:
 
     # Assert
     # The expected string is constructed from the mock_box_info data
-    expected_unique_id = (
-        f"{TEST_MODEL}_{mock_box_info.did_string}_{entity_description.key}".lower()
-    )
+    expected_unique_id = f"{mock_box_info.did_string}_{entity_description.key}".lower()
 
     assert entity.unique_id == expected_unique_id
     assert entity.device_info["identifiers"] == {(DOMAIN, mock_box_info.did_string)}
     assert entity.device_info["name"] == TEST_TITLE
     assert entity.device_info["model"] == TEST_MODEL
+
+
+async def test_entity_attributes(coordinator: MagicMock) -> None:
+    """Test the entity attributes."""
+    entity_description = MagicMock(key="test_key", name="Test Name")
+    entity = CrealityBoxEntity(coordinator=coordinator, description=entity_description)
+
+    assert entity.icon == "mdi:printer-3d"
+    assert entity.has_entity_name is True
