@@ -57,7 +57,7 @@ async def async_setup_entry(
     )
 
 
-class CrealityBoxBinarySensor(CrealityBoxEntity, BinarySensorEntity):  # type: ignore[misc]
+class CrealityBoxBinarySensor(CrealityBoxEntity, BinarySensorEntity):  # pyright: ignore[reportIncompatibleVariableOverride]
     """creality_box_control binary_sensor class."""
 
     def __init__(
@@ -67,7 +67,6 @@ class CrealityBoxBinarySensor(CrealityBoxEntity, BinarySensorEntity):  # type: i
     ) -> None:
         """Initialize the binary_sensor class."""
         super().__init__(coordinator, entity_description)
-
         self._update_attr_value()
 
     def _handle_coordinator_update(self) -> None:
@@ -77,5 +76,4 @@ class CrealityBoxBinarySensor(CrealityBoxEntity, BinarySensorEntity):  # type: i
 
     def _update_attr_value(self) -> None:
         """Update the _attr_is_on value based on the coordinator data."""
-        value = self.entity_description.value_fn(self.coordinator.data) # pyright: ignore[reportAttributeAccessIssue]
-        self._attr_is_on = bool(value) if value is not None else False
+        self._attr_is_on = self.entity_description.value_fn(self.coordinator.data)  # pyright: ignore[reportAttributeAccessIssue]

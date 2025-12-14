@@ -60,9 +60,8 @@ async def test_send_command(
     """Test sending commands to the printer."""
     # Assert
     if command == "error":
-        with pytest.raises(Exception) as exc_info:  # noqa: PT011
+        with pytest.raises(ValueError, match="Unknown command: error"):
             await coordinator.send_command(command)
-        assert str(exc_info.value) == "Unknown command: error"
     else:
         await coordinator.send_command(command)
         getattr(

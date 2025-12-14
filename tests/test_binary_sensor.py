@@ -50,14 +50,14 @@ def coordinator(mock_box_info: BoxInfo) -> MagicMock:
                 name="None",
                 value_fn=lambda x: None,  # noqa: ARG005
             ),
-            False,
+            None,
         ),
     ],
 )
 async def test_binary_sensor(
     coordinator: MagicMock,
     entity_description: MagicMock,
-    expected_state: bool,  # noqa: FBT001
+    expected_state: bool | None,  # noqa: FBT001
 ) -> None:
     """Test the binary sensor."""
     # Arrange
@@ -85,6 +85,7 @@ async def test_binary_sensor_setup_entry(hass: HomeAssistant) -> None:
     # Assert that async_add_entities was called with a list of the expected sensors
     assert async_add_entities.call_count == 1
     assert len(sensors) == len(ENTITY_DESCRIPTIONS)
+
 
 async def test_binary_sensor_update(coordinator: MagicMock) -> None:
     """Test the binary sensor update."""

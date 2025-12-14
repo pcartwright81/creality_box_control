@@ -21,7 +21,7 @@ jobs:
         shell: "bash"
         run: |
           cd "${{ github.workspace }}/custom_components/creality_box_control"
-          zip creality_box_control.zip -r ./
+          zip -r creality_box_control.zip . -x "*.pyc" -x "__pycache__/*"
 
       - name: "Upload the ZIP file to the release"
         uses: "softprops/action-gh-release@v2.5.0"

@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-from creality_wifi_box_client.creality_wifi_box_client import CrealityWifiBoxClient
-from homeassistant import config_entries, data_entry_flow
+from creality_wifi_box_client.creality_wifi_box_client import (
+    CrealityWifiBoxClient,
+)
+from homeassistant import config_entries
 
 from .const import DOMAIN, HOST, LOGGER, MODEL, PORT
 
@@ -18,7 +20,7 @@ class CrealityBoxFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(
         self,
         user_input: dict | None = None,
-    ) -> data_entry_flow.FlowResult:
+    ) -> config_entries.ConfigFlowResult:
         """Handle a flow initialized by the user."""
         _errors = {}
         if user_input is not None:
@@ -27,8 +29,8 @@ class CrealityBoxFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                     host=user_input[HOST],
                     port=user_input[PORT],
                 )
-            except Exception as exception:  # noqa: BLE001 api needs real exceptions, but it's really just pass or fail.
-                LOGGER.exception(exception)
+            except Exception as exception:  # noqa: BLE001
+                LOGGER.exception("Connection failed: %s", exception)
                 _errors["base"] = "unknown"
             else:
                 user_input[MODEL] = model

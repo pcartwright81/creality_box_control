@@ -39,9 +39,9 @@ async def test_entity(coordinator: MagicMock, mock_box_info: BoxInfo) -> None:
     expected_unique_id = f"{mock_box_info.did_string}_{entity_description.key}".lower()
 
     assert entity.unique_id == expected_unique_id
-    assert entity.device_info["identifiers"] == {(DOMAIN, mock_box_info.did_string)}
-    assert entity.device_info["name"] == TEST_TITLE
-    assert entity.device_info["model"] == TEST_MODEL
+    assert entity.device_info["identifiers"] == {(DOMAIN, mock_box_info.did_string)}  # pyright: ignore[reportOptionalSubscript]
+    assert entity.device_info["name"] == TEST_TITLE  # pyright: ignore[reportOptionalSubscript]
+    assert entity.device_info["model"] == TEST_MODEL  # pyright: ignore[reportOptionalSubscript]
 
 
 async def test_entity_attributes(coordinator: MagicMock) -> None:

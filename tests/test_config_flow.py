@@ -146,7 +146,7 @@ async def test__test_connect_and_get_model_success(mock_box_info: BoxInfo) -> No
 
 
 async def test__test_connect_and_get_model_error() -> None:
-    """Test successful credential validation."""
+    """Test failed credential validation."""
     with patch(
         "creality_wifi_box_client.creality_wifi_box_client.CrealityWifiBoxClient.get_info",
         return_value=MagicMock(model=""),

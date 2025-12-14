@@ -24,7 +24,7 @@ jobs:
           python-version: ${{ env.DEFAULT_PYTHON }}
       - name: Install requirements
         run: |
-          pip install pip
+          pip install --upgrade pip
           pip install .[dev,test]
       - name: "Lint"
         run: python3 -m ruff check .

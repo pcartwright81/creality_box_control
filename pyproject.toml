@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "colorlog==6.10.1",
-    "creality-wifi-box-client==0.0.4",
+    "creality-wifi-box-client==0.1.0",
     "homeassistant==2025.12.1",
     "pip==25.3",
     "pydebug",
@@ -20,14 +20,17 @@ dependencies = [
 include = ["custom_components*"]
 
 [project.optional-dependencies]
-test = ["pytest-homeassistant-custom-component",
-"pytest-mock",
-"ruff==0.14.8"]
+test = [
+    "pytest-homeassistant-custom-component",
+    "pytest-mock",
+    "ruff==0.14.8"
+]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 testpaths = ["tests"]
+pythonpath = [".", "tests"]  # Added this line to fix imports
 python_files = "test_*.py"
 norecursedirs = [".git", "testing_config"]
 addopts = "--timeout=150 --cov-report=xml:coverage.xml --cov-report=term-missing --cov=custom_components.creality_box_control --cov-fail-under=100 --disable-socket --allow-unix-socket"

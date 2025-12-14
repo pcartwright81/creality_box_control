@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import timedelta
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
@@ -16,7 +16,6 @@ if TYPE_CHECKING:
     from .data import CrealityBoxControlConfigEntry
 
 
-# https://developers.home-assistant.io/docs/integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities
 class CrealityBoxDataUpdateCoordinator(DataUpdateCoordinator[BoxInfo]):
     """Class to manage fetching data from the API."""
 
@@ -34,7 +33,7 @@ class CrealityBoxDataUpdateCoordinator(DataUpdateCoordinator[BoxInfo]):
             update_interval=timedelta(seconds=10),
         )
 
-    async def _async_update_data(self) -> Any:  # noqa: ANN401
+    async def _async_update_data(self) -> BoxInfo:
         """Update data via library."""
         return await self.config_entry.runtime_data.client.get_info()
 

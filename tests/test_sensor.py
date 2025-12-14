@@ -120,7 +120,7 @@ async def test_sensor(
     assert sensor.native_value == expected_state
 
 
-async def test_button_setup_entry(hass: HomeAssistant) -> None:
+async def test_sensor_setup_entry(hass: HomeAssistant) -> None:
     """Test the async_setup_entry function."""
     entry = MagicMock()
     coordinator = AsyncMock()
