@@ -23,8 +23,8 @@ include = ["custom_components*"]
 test = [
     "pytest-homeassistant-custom-component",
     "pytest-mock",
-    "ruff==0.14.8,
-    pycares<5.0.0"
+    "ruff==0.14.8",
+    "pycares<5.0.0"
 ]
 
 [tool.pytest.ini_options]
