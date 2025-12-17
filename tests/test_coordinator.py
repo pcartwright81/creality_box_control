@@ -3,6 +3,7 @@
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
+from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
 from homeassistant.core import HomeAssistant
 
 from custom_components.creality_box_control.const import (
@@ -13,14 +14,14 @@ from custom_components.creality_box_control.const import (
 from custom_components.creality_box_control.coordinator import (
     CrealityBoxDataUpdateCoordinator,
 )
-from tests import TEST_BOX_INFO, TEST_CONFIG_ENTRY_ID, TEST_TITLE
+from tests import TEST_CONFIG_ENTRY_ID, TEST_TITLE
 
 
 @pytest.fixture
-def mock_client() -> AsyncMock:
+def mock_client(mock_box_info: BoxInfo) -> AsyncMock:
     """Mock the client."""
     client = AsyncMock()
-    client.get_info = AsyncMock(return_value=TEST_BOX_INFO)
+    client.get_info = AsyncMock(return_value=mock_box_info)
     return client
 
 
@@ -59,9 +60,8 @@ async def test_send_command(
     """Test sending commands to the printer."""
     # Assert
     if command == "error":
-        with pytest.raises(Exception) as exc_info:  # noqa: PT011
+        with pytest.raises(ValueError, match="Unknown command: error"):
             await coordinator.send_command(command)
-        assert str(exc_info.value) == "Unknown command: error"
     else:
         await coordinator.send_command(command)
         getattr(

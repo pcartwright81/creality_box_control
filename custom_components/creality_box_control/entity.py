@@ -1,13 +1,13 @@
-"""CrealityBoxEntity class."""
+"""Base entity for the Creality Box Control integration."""
 
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from homeassistant.helpers.device_registry import DeviceEntryType, DeviceInfo
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import ATTRIBUTION, HOST, MODEL
+from .const import DOMAIN
 from .coordinator import CrealityBoxDataUpdateCoordinator
 
 if TYPE_CHECKING:
@@ -15,40 +15,26 @@ if TYPE_CHECKING:
 
 
 class CrealityBoxEntity(CoordinatorEntity[CrealityBoxDataUpdateCoordinator]):
-    """CrealityBoxEntity class."""
+    """Defines a base Creality Box entity."""
 
-    _attr_attribution = ATTRIBUTION
+    _attr_has_entity_name = True
+    _attr_icon = "mdi:printer-3d"
 
     def __init__(
         self,
         coordinator: CrealityBoxDataUpdateCoordinator,
         description: EntityDescription,
     ) -> None:
-        """Initialize."""
+        """Initialize the entity."""
         super().__init__(coordinator)
-        self._attr_unique_id = coordinator.config_entry.entry_id
         self.entity_description = description
-        self.use_device_name = True
-        self._model = coordinator.config_entry.data[MODEL]
-        self._host = coordinator.config_entry.data[HOST]
-        self._attr_device_info = DeviceInfo(
-            entry_type=DeviceEntryType.SERVICE,
-            identifiers={(self._model, self._host)},
-            manufacturer="Creality",
-            name=f"{self._model}@{self._host}",
+
+        self._attr_unique_id = (
+            f"{coordinator.data.did_string}_{description.key}".lower()
         )
-
-    @property
-    def name(self) -> str | None:
-        """Return the name of this device."""
-        return f"{self._model}@{self._host} {self.entity_description.name}"
-
-    @property
-    def unique_id(self) -> str | None:
-        """Return a unique identifier for this sensor."""
-        return f"{self._model}_{self._host}_{self.entity_description.key}".lower()
-
-    @property
-    def icon(self) -> str | None:
-        """Return the icon to use in the frontend."""
-        return "mdi:printer-3d"
+        self._attr_device_info = DeviceInfo(
+            identifiers={(DOMAIN, coordinator.data.did_string)},
+            name=coordinator.config_entry.title,
+            manufacturer="Creality",
+            model=coordinator.data.model,
+        )

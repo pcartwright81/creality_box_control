@@ -8,25 +8,25 @@ on:
     branches:
       - "main"
 
+env:
+  DEFAULT_PYTHON: "3.13"
+
 jobs:
-  ruff:
-    name: "Ruff"
+  tests:
     runs-on: "ubuntu-latest"
+    name: Lint
     steps:
-        - name: "Checkout the repository"
-          uses: "actions/checkout@v6.0.1"
-
-        - name: "Set up Python"
-          uses: actions/setup-python@v6.1.0
-          with:
-            python-version: "3.14"
-            cache: "pip"
-
-        - name: "Install requirements"
-          run: python3 -m pip install -r requirements.txt
-
-        - name: "Lint"
-          run: python3 -m ruff check .
-
-        - name: "Format"
-          run: python3 -m ruff format . --check
+      - name: Check out code from GitHub
+        uses: "actions/checkout@v6.0.0"
+      - name: Setup Python ${{ env.DEFAULT_PYTHON }}
+        uses: "actions/setup-python@v6.1.0"
+        with:
+          python-version: ${{ env.DEFAULT_PYTHON }}
+      - name: Install requirements
+        run: |
+          pip install --upgrade pip
+          pip install .[dev,test]
+      - name: "Lint"
+        run: python3 -m ruff check .
+      - name: "Format"
+        run: python3 -m ruff format . --check

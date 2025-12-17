@@ -122,7 +122,7 @@ async def async_setup_entry(
     )
 
 
-class CrealityBoxSensor(CrealityBoxEntity, SensorEntity):
+class CrealityBoxSensor(CrealityBoxEntity, SensorEntity):  # pyright: ignore[reportIncompatibleVariableOverride]
     """creality_box_control Sensor class."""
 
     def __init__(
@@ -132,9 +132,8 @@ class CrealityBoxSensor(CrealityBoxEntity, SensorEntity):
     ) -> None:
         """Initialize the sensor class."""
         super().__init__(coordinator, entity_description)
-        self.entity_description: CrealityBoxSensorEntityDescription = entity_description
 
     @property
-    def native_value(self) -> Any:
+    def native_value(self) -> Any:  # pyright: ignore[reportIncompatibleVariableOverride] # noqa: ANN401
         """Return the native value of the sensor."""
-        return self.entity_description.value_fn(self.coordinator.data)
+        return self.entity_description.value_fn(self.coordinator.data)  # pyright: ignore[reportAttributeAccessIssue]
