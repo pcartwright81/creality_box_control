@@ -24,7 +24,7 @@ test = [
     "pytest-homeassistant-custom-component",
     "pytest-mock",
     "ruff==0.14.8",
-    "pycares<5.0.0"
+    "pycares<5.0.1"
 ]
 
 [tool.pytest.ini_options]
