@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "colorlog==6.10.1",
-    "creality-wifi-box-client==0.1.0",
+    "creality-wifi-box-client==0.1.1",
     "homeassistant==2026.1.0",
     "pip==25.3",
     "pydebug",
