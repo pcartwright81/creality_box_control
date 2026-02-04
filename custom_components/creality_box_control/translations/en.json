@@ -1,17 +1,17 @@
 {
-    "config": {
-        "step": {
-            "user": {
-                "description": "If you need help with the configuration have a look here: https://github.com/pcartwright81/creality_box_control",
-                "data": {
-                    "host": "Host",
-                    "port": "Port"
-                }
-            }
-        },
-        "error": {
-            "connection": "Unable to connect to the server.",
-            "unknown": "Unknown error occurred."
+  "config": {
+    "step": {
+      "user": {
+        "description": "If you need help with the configuration have a look here: {link}",
+        "data": {
+          "host": "Host",
+          "port": "Port"
         }
+      }
+    },
+    "error": {
+      "connection": "Unable to connect to the server.",
+      "unknown": "Unknown error occurred."
     }
+  }
 }
