@@ -48,6 +48,9 @@ class CrealityBoxFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 },
             ),
             errors=_errors,
+            description_placeholders={
+                "link": "https://github.com/pcartwright81/creality_box_control"
+            },
         )
 
     async def _test_connect_and_get_model(self, host: str, port: int) -> str:
