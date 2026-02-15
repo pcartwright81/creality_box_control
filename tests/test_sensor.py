@@ -48,9 +48,9 @@ def coordinator(mock_box_info: BoxInfo) -> MagicMock:
             MagicMock(
                 key="state",
                 name="Current State",
-                value_fn=lambda x: "Printing"
-                if x.state == 1 and x.connect == 1
-                else "Unknown",
+                value_fn=lambda x: (
+                    "Printing" if x.state == 1 and x.connect == 1 else "Unknown"
+                ),
             ),
             "Printing",
         ),
