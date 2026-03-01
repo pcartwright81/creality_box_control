@@ -23,7 +23,7 @@ include = ["custom_components*"]
 test = [
     "pytest-homeassistant-custom-component==0.13.316",
     "pytest-mock",
-    "ruff==0.15.2",
+    "ruff==0.15.4",
     "pycares<5.0.2"
 ]
 
