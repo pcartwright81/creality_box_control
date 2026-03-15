@@ -11,7 +11,7 @@ requires-python = ">=3.12"
 dependencies = [
     "colorlog==6.10.1",
     "creality-wifi-box-client==0.1.1",
-    "homeassistant==2026.2.3",
+    "homeassistant==2026.3.1",
     "pip==26.0.1",
     "pydebug",
 ]
@@ -21,9 +21,9 @@ include = ["custom_components*"]
 
 [project.optional-dependencies]
 test = [
-    "pytest-homeassistant-custom-component==0.13.316",
+    "pytest-homeassistant-custom-component==0.13.317",
     "pytest-mock",
-    "ruff==0.15.4",
+    "ruff==0.15.6",
     "pycares<5.0.2"
 ]
 
