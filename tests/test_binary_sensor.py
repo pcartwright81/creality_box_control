@@ -1,10 +1,9 @@
 """Tests for the binary sensor platform."""
 
+from typing import TYPE_CHECKING
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
-from homeassistant.core import HomeAssistant
 
 from custom_components.creality_box_control.binary_sensor import (
     ENTITY_DESCRIPTIONS,
@@ -13,6 +12,10 @@ from custom_components.creality_box_control.binary_sensor import (
 )
 from custom_components.creality_box_control.const import DOMAIN, HOST, MODEL
 from tests import TEST_CONFIG_ENTRY_ID, TEST_HOST, TEST_MODEL, TEST_TITLE
+
+if TYPE_CHECKING:
+    from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
+    from homeassistant.core import HomeAssistant
 
 
 @pytest.fixture

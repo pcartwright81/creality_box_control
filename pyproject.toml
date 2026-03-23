@@ -7,7 +7,7 @@ name = "creality_box_control"
 version = "0.0.3"
 description = "Home Assistant Custom Component"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 dependencies = [
     "colorlog==6.10.1",
     "creality-wifi-box-client==0.1.1",
@@ -44,7 +44,7 @@ root = "tests"
 reportTypedDictNotRequiredAccess = "none"
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py314"
 exclude = ["build", "dist", ".venv", "__pycache__"]
 
 [tool.ruff.lint]

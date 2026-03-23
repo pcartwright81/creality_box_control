@@ -1,13 +1,16 @@
 """Tests for the base entity."""
 
+from typing import TYPE_CHECKING
 from unittest.mock import MagicMock
 
 import pytest
-from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
 
 from custom_components.creality_box_control.const import DOMAIN, HOST, MODEL
 from custom_components.creality_box_control.entity import CrealityBoxEntity
 from tests import TEST_CONFIG_ENTRY_ID, TEST_HOST, TEST_MODEL, TEST_TITLE
+
+if TYPE_CHECKING:
+    from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
 
 
 @pytest.fixture

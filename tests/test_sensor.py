@@ -1,12 +1,10 @@
 """Tests for the sensor platform."""
 
 from datetime import timedelta
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
-from homeassistant.core import HomeAssistant
 
 from custom_components.creality_box_control.const import DOMAIN, HOST, MODEL
 from custom_components.creality_box_control.sensor import (
@@ -17,6 +15,10 @@ from custom_components.creality_box_control.sensor import (
     async_setup_entry,
 )
 from tests import TEST_CONFIG_ENTRY_ID, TEST_HOST, TEST_MODEL, TEST_TITLE
+
+if TYPE_CHECKING:
+    from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
+    from homeassistant.core import HomeAssistant
 
 
 @pytest.fixture
