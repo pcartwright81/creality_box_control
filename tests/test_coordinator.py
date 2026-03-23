@@ -1,10 +1,9 @@
 """Tests for the coordinator."""
 
+from typing import TYPE_CHECKING
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
-from homeassistant.core import HomeAssistant
 
 from custom_components.creality_box_control.const import (
     PRINT_PAUSE,
@@ -15,6 +14,10 @@ from custom_components.creality_box_control.coordinator import (
     CrealityBoxDataUpdateCoordinator,
 )
 from tests import TEST_CONFIG_ENTRY_ID, TEST_TITLE
+
+if TYPE_CHECKING:
+    from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
+    from homeassistant.core import HomeAssistant
 
 
 @pytest.fixture

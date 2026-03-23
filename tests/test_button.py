@@ -1,9 +1,9 @@
 """Tests for the button platform."""
 
+from typing import TYPE_CHECKING
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
-from homeassistant.core import HomeAssistant
 
 from custom_components.creality_box_control.button import (
     ENTITY_DESCRIPTIONS,
@@ -16,6 +16,9 @@ from custom_components.creality_box_control.const import (
     PRINT_STOP,
 )
 from tests import TEST_CONFIG_ENTRY_ID, TEST_TITLE
+
+if TYPE_CHECKING:
+    from homeassistant.core import HomeAssistant
 
 
 @pytest.fixture

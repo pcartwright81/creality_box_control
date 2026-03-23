@@ -1,17 +1,21 @@
 """Tests for the __init__ module."""
 
-from collections.abc import Generator
+from typing import TYPE_CHECKING
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from homeassistant.const import Platform
-from homeassistant.core import HomeAssistant
 
 from custom_components.creality_box_control import (
     async_reload_entry,
     async_setup_entry,
     async_unload_entry,
 )
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
+
+    from homeassistant.core import HomeAssistant
 
 
 # This fixture is used to enable custom integrations, otherwise the custom_components

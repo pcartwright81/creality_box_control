@@ -1,17 +1,20 @@
 """Tests for the config flow."""
 
 import pathlib
+from typing import TYPE_CHECKING
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
-from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
-from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResultType
 from homeassistant.loader import Integration
 
 from custom_components.creality_box_control.config_flow import CrealityBoxFlowHandler
 from custom_components.creality_box_control.const import DOMAIN, HOST, MODEL, PORT
 from tests import TEST_HOST, TEST_MODEL, TEST_PORT
+
+if TYPE_CHECKING:
+    from creality_wifi_box_client.creality_wifi_box_client import BoxInfo
+    from homeassistant.core import HomeAssistant
 
 pytestmark = pytest.mark.asyncio
 
