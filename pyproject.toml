@@ -20,7 +20,7 @@ include = ["custom_components*"]
 
 [project.optional-dependencies]
 test = [
-    "pytest-homeassistant-custom-component==0.13.334",
+    "pytest-homeassistant-custom-component==0.13.336",
     "pytest-mock",
     "ruff==0.15.15",
     "pycares<5.0.2",
