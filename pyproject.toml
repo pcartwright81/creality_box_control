@@ -11,7 +11,7 @@ requires-python = ">=3.14"
 dependencies = [
     "colorlog==6.10.1",
     "creality-wifi-box-client==0.1.1",
-    "homeassistant==2026.5.4",
+    "homeassistant==2026.6.0",
     "pydebug",
 ]
 
