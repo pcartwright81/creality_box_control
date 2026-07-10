@@ -2,5 +2,6 @@
     "name": "Creality Wifi Box Control",
     "hide_default_branch": true,
     "homeassistant": "2026.3.3",
-    "render_readme": true
+    "render_readme": true,
+    "documentation": "https://github.com/pcartwright81/creality_box_control"
 }
