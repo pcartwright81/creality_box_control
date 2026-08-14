@@ -9,9 +9,8 @@ description = "Home Assistant Custom Component"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "colorlog==6.10.1",
     "creality-wifi-box-client==0.1.1",
-    "homeassistant==2026.7.2",
+    "homeassistant==2026.8.1",
     "pydebug",
 ]
 
@@ -20,10 +19,10 @@ include = ["custom_components*"]
 
 [project.optional-dependencies]
 test = [
-    "pytest-homeassistant-custom-component==0.13.346",
+    "pytest-homeassistant-custom-component==0.13.355",
     "pytest-mock",
-    "ruff==0.15.21",
-    "pycares<5.0.2",
+    "ruff==0.16.2",
+    "pycares==5.0.1",
     "pycognito>=2024.5.1,<2025",
 ]
 
@@ -54,7 +53,8 @@ ignore = [
     "D212",   # multi-line-summary-first-line (incompatible with formatter)
     "COM812", # incompatible with formatter
     "ISC001", # incompatible with formatter
-    "EXE002", # no shebang
+    "EXE002", # no shebang,    
+    "CPY001", # missing copyright
 ]
 
 [tool.ruff.lint.flake8-pytest-style]
