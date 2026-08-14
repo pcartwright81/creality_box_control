@@ -23,7 +23,7 @@ test = [
     "pytest-homeassistant-custom-component==0.13.355",
     "pytest-mock",
     "ruff==0.16.2",
-    "pycares<5.0.2",
+    "pycares>=5.0.2",
     "pycognito>=2024.5.1,<2025",
 ]
 
