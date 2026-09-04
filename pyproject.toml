@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "creality-wifi-box-client==0.1.1",
-    "homeassistant==2026.8.2",
+    "homeassistant==2026.9.0",
     "pydebug",
 ]
 
@@ -19,9 +19,9 @@ include = ["custom_components*"]
 
 [project.optional-dependencies]
 test = [
-    "pytest-homeassistant-custom-component==0.13.356",
+    "pytest-homeassistant-custom-component==0.13.363",
     "pytest-mock",
-    "ruff==0.16.3",
+    "ruff==0.16.6",
     "pycares==5.0.1",
     "pycognito>=2024.5.1,<2025",
 ]
